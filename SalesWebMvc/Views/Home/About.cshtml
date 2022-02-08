@@ -1,7 +1,16 @@
 ﻿@{
-    ViewData["Title"] = "About";
+    // posso colocar qualquer codigo c# ex:
+    // int x = 20;
+    // double y = 44.5;
+
+    ViewData["Title"] = "About[Kipper]";
 }
 <h2>@ViewData["Title"]</h2>
 <h3>@ViewData["Message"]</h3>
 
-<p>Use this area to provide additional information.</p>
+<p>Aqui eu posso editar na classe: HomeController e home/about.</p>
+<p>Aluno: @ViewData["Developer"]</p>
+
+<address>
+    <strong>More information: </strong><a href="http://kipper.com.br">kipper.com.br </a>
+</address>

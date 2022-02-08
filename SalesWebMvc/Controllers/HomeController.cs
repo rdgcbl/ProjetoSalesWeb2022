@@ -13,9 +13,11 @@ namespace SalesWebMvc.Controllers {
         }
 
         public IActionResult About() {
-            ViewData["Message"] = "Your application description page.";
+            ViewData["Message"] = "Salles Web MVC from c# Course";
+            ViewData["Developer"] = "Rodrigo Kipper";
 
             return View();
+            // o controlador 'home' na acao 'about', passou esse valor para o 'viewdata'
         }
 
         public IActionResult Contact() {
