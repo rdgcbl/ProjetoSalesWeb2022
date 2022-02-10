@@ -12,6 +12,7 @@ using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using SalesWebMvc.Data;
 using SalesWebMvc.Models;
+using SalesWebMvc.Services;
 
 namespace SalesWebMvc {
     public class Startup {
@@ -33,11 +34,12 @@ namespace SalesWebMvc {
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
 
-    services.AddDbContext<SalesWebMvcContext>(options =>
-            options.UseMySql(Configuration.GetConnectionString("SalesWebMvcContext"), builder =>
-                builder.MigrationsAssembly("SalesWebMvc"))); //nome do projeto
+            services.AddDbContext<SalesWebMvcContext>(options =>
+                    options.UseMySql(Configuration.GetConnectionString("SalesWebMvcContext"), builder =>
+                        builder.MigrationsAssembly("SalesWebMvc"))); //nome do projeto
 
             services.AddScoped<SeedingService>(); //isso aqui registra o nosso servico no sistema de injecao de dependencia da aplicação
+            services.AddScoped<SellerServices>();// nosso servico agora pode ser injetado em outras classes
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -58,7 +60,7 @@ namespace SalesWebMvc {
             {
                 routes.MapRoute(
                     name: "default",
-                    template: "{controller=Home}/{action=Index}/{id?}"); 
+                    template: "{controller=Home}/{action=Index}/{id?}");
                 // se eu nao digitar nada vai para o 'home' 
             });
         }
