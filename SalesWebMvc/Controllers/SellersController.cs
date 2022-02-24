@@ -30,6 +30,12 @@ namespace SalesWebMvc.Controllers {
         [HttpPost]
         [ValidateAntiForgeryToken]
         public IActionResult Create(Seller seller) {
+            if (!ModelState.IsValid) { //se nao for valido eu vou retornar a view com o objeto
+                var departments = _departmentService.FindAll();
+                var viewModel = new SellerFormViewModel { Seller = seller, Departments = departments };
+                return View(viewModel);
+            }// serve para testar se o modelo foi validado
+
             _sellerService.Insert(seller);
             return RedirectToAction(nameof(Index));
         }
@@ -75,6 +81,12 @@ namespace SalesWebMvc.Controllers {
         [HttpPost]
         [ValidateAntiForgeryToken]
         public IActionResult Edit(int id, Seller seller) {
+            if (!ModelState.IsValid) { //se nao for valido eu vou retornar a view com o objeto
+                var departments = _departmentService.FindAll();
+                var viewModel = new SellerFormViewModel { Seller = seller, Departments = departments };
+                return View(viewModel);
+            }// serve para testar se o modelo foi validado
+
             if (id != seller.Id) {
                 return RedirectToAction(nameof(Error), new { message = "Id nao correspondem" });
             }
