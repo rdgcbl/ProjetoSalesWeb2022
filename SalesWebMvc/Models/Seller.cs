@@ -2,13 +2,23 @@
 using System.Collections.Generic;
 using SalesWebMvc.Models.Enums; //
 using System.Linq; // para fazer a funcao TotalSales
+using System.ComponentModel.DataAnnotations;
 
 namespace SalesWebMvc.Models {
     public class Seller {
         public int Id { get; set; }
         public string Name { get; set; }
+
+        [DataType(DataType.EmailAddress)] //serve para definir o email como uma forma de link
         public string Email { get; set; }
+
+        [Display(Name = "Birth Date")] //serve para colocar um espaco entre as palavras
+        [DataType(DataType.Date)] //serve para remover as horas que fica na frente
+        [DisplayFormat(DataFormatString = "{0:dd/MM/yyyy}")]
         public DateTime BirthDate { get; set; }
+
+        [DisplayFormat(DataFormatString = "{0:f2}")]
+        [Display(Name = "Base Salary")] //serve para colocar um espaco entre as palavras
         public double BaseSalary { get; set; }
         public ICollection<SalesRecord> Sales { get; set; } = new List<SalesRecord>();
         public Department Department { get; set; }
